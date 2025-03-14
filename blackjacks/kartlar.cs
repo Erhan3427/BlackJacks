@@ -11,14 +11,14 @@ namespace blackjacks
         public kartlar(string kart, string değerler)
         {
             this.kart = kart;
-            this.değerler = değerler;
+            this.degerler = değerler;
         }
 
         public string kart { get; set; }
-        public string değerler { get; set; }
+        public string degerler { get; set; }
         public override string ToString()
         {
-            return kart+""+değerler;
+            return kart+""+degerler;
         }
     }
 }
