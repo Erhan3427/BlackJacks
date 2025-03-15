@@ -45,7 +45,6 @@
             pbBol = new PictureBox();
             txtbox3 = new TextBox();
             textBox2 = new TextBox();
-            btngay = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBol2).BeginInit();
@@ -60,6 +59,7 @@
             btnDouble.TabIndex = 0;
             btnDouble.Text = "Double";
             btnDouble.UseVisualStyleBackColor = true;
+            btnDouble.Click += btnDouble_Click;
             // 
             // btnGec
             // 
@@ -73,6 +73,7 @@
             // 
             // btnKartCek
             // 
+            btnKartCek.Enabled = false;
             btnKartCek.Location = new Point(84, 331);
             btnKartCek.Name = "btnKartCek";
             btnKartCek.Size = new Size(112, 64);
@@ -90,7 +91,6 @@
             btnBol.TabIndex = 0;
             btnBol.Text = "Böl";
             btnBol.UseVisualStyleBackColor = true;
-            btnBol.Click += btnBol_Click;
             // 
             // btnKartDagit
             // 
@@ -100,7 +100,7 @@
             btnKartDagit.TabIndex = 0;
             btnKartDagit.Text = "kartları Dağıt";
             btnKartDagit.UseVisualStyleBackColor = true;
-            btnKartDagit.Click += btnKartDagit_Click_1;
+            btnKartDagit.Click += btnKartDagit_Click;
             // 
             // pictureBox1
             // 
@@ -188,7 +188,7 @@
             lblKurpiyerToplam.Name = "lblKurpiyerToplam";
             lblKurpiyerToplam.Size = new Size(112, 33);
             lblKurpiyerToplam.TabIndex = 3;
-            lblKurpiyerToplam.Text = "label1";
+            lblKurpiyerToplam.Text = "Kurpiyer";
             // 
             // listView1
             // 
@@ -238,22 +238,11 @@
             textBox2.Size = new Size(88, 27);
             textBox2.TabIndex = 5;
             // 
-            // btngay
-            // 
-            btngay.Location = new Point(1119, 331);
-            btngay.Name = "btngay";
-            btngay.Size = new Size(94, 29);
-            btngay.TabIndex = 6;
-            btngay.Text = "GAY BUTONU";
-            btngay.UseVisualStyleBackColor = true;
-            btngay.Click += button3_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1225, 502);
-            Controls.Add(btngay);
             Controls.Add(textBox2);
             Controls.Add(txtbox3);
             Controls.Add(listView1);
@@ -296,6 +285,5 @@
         private PictureBox pbBol;
         private TextBox txtbox3;
         private TextBox textBox2;
-        private Button btngay;
     }
 }

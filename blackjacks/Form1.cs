@@ -18,8 +18,8 @@ namespace blackjacks
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            KartKarýþtýr(); // Kartlar karýþtýrýlýyor
             KartDagýt(); // Kart destesi oluþturuluyor
+            KartKarýþtýr(); // Kartlar karýþtýrýlýyor
         }
 
 
@@ -104,25 +104,24 @@ namespace blackjacks
             lblToplam2.Text = oyuncuSkor.ToString();
         }
 
-        
 
-      
+
+
 
         public void Bolme()
         {
             List<kartlar> yeniOyuncu = new List<kartlar>() { oyuncu[0] };
-            List<kartlar> yeniOyuncu2 = new List<kartlar>();
+            List<kartlar> yeniOyuncu2 = new List<kartlar>() { oyuncu[1] };
 
             yeniOyuncu.Add(Deste[0]);
-            yeniOyuncu.Add(Deste[2]);
 
             yeniOyuncu2.Add(Deste[1]);
-            yeniOyuncu2.Add(Deste[3]);
 
             pbBol.Image = ýmageList1.Images[0];
             pbBol2.Image = ýmageList1.Images[1];
 
             Hesapla();
+            SonucHesapla();
             btnBol.Enabled = false;
         }
 
@@ -132,7 +131,7 @@ namespace blackjacks
             for (int i = 0; i < Deste.Count; i++)
             {
                 pictureBox1.Image = ýmageList1.Images[i];
-                pictureBox2.Image = ýmageList1.Images[i+1];
+                pictureBox2.Image = ýmageList1.Images[i + 1];
 
             }
 
@@ -146,6 +145,30 @@ namespace blackjacks
             KartDagýt();
 
 
+        }
+        public void SonucHesapla()
+        {
+            int kurpiyerSkoru = SkorHesapla(kurpiyer);
+            int oyuncuSkoru = SkorHesapla(oyuncu);
+            lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
+            lblToplam2.Text = oyuncuSkoru.ToString();
+
+            if (oyuncuSkoru > 21)
+            {
+                MessageBox.Show("21'i geçtiniz, kaybettiniz!");
+            }
+            else if (kurpiyerSkoru > 21 || oyuncuSkoru > kurpiyerSkoru)
+            {
+                MessageBox.Show("Tebrikler, kazandýnýz!");
+            }
+            else if (oyuncuSkoru == kurpiyerSkoru)
+            {
+                MessageBox.Show("Berabere!");
+            }
+            else
+            {
+                MessageBox.Show("Kaybettiniz!");
+            }
         }
 
 
@@ -172,14 +195,14 @@ namespace blackjacks
             // Ýlk oyuncu ve kurpiyer kartlarýný listView'e ekleme
             ListViewItem item = new ListViewItem((kurpiyer[0].ToString()));
             item.SubItems.Add(oyuncu[0].ToString());
-            item.SubItems.Add(lblKurpiyerToplam.Text);
-            item.SubItems.Add(lblToplam2.Text);
+            item.SubItems.Add(SkorHesapla(kurpiyer).ToString());
+            item.SubItems.Add(SkorHesapla(oyuncu).ToString());
             listView1.Items.Add(item);
 
             ListViewItem item2 = new ListViewItem(kurpiyer[1].ToString());
             item2.SubItems.Add(oyuncu[1].ToString());
-            item2.SubItems.Add(lblKurpiyerToplam.Text);
-            item2.SubItems.Add(lblToplam2.Text);
+            item2.SubItems.Add(SkorHesapla(kurpiyer).ToString());
+            item2.SubItems.Add(SkorHesapla(oyuncu).ToString());
             listView1.Items.Add(item2);
 
         }
@@ -193,30 +216,7 @@ namespace blackjacks
             Bolme(); // Oyuncu eli bölünüyor
         }
 
-        private void btnKartDagit_Click_1(object sender, EventArgs e)
-        {
 
-            if (Deste.Count <=0)
-            {
-                MessageBox.Show("Yeterli kart kalmadý.Baþtan daðýtýlýyor");
-                BitenKartDagit();
-            }
-
-            KartKarýþtýr();
-            kurpiyer.Clear();
-            oyuncu.Clear();
-
-            kurpiyer.Add(Deste[0]);
-            kurpiyer.Add(Deste[2]);
-            oyuncu.Add(Deste[1]);
-            oyuncu.Add(Deste[3]);
-            KartGoster();
-
-
-            Deste.RemoveRange(0, 4);
-            Hesapla();
-            btnDeneme_Click(sender, e);
-        }
 
 
         int i = 4;
@@ -243,91 +243,86 @@ namespace blackjacks
 
 
                 int oyuncuSkoruSon = SkorHesapla(oyuncu);
+                int kurpiyerSkoru = SkorHesapla(kurpiyer);
                 lblToplam2.Text = oyuncuSkoruSon.ToString();
+                lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
                 KartGoster();
-
                 if (oyuncuSkoruSon > 21)
                 {
-                    MessageBox.Show("21 i geçtin patladýn");
-                    return;
-
+                    MessageBox.Show("21 geçtiniz kaybettiniz");
                 }
                 kartSayisi++;
 
             }
         }
 
-     
+
 
 
         private void btnGec_Click(object sender, EventArgs e)
         {
             btnKartCek.Enabled = false;
-           
+
             int kurpiyerSkoru = SkorHesapla(kurpiyer);
             int oyuncuSkoru = SkorHesapla(oyuncu);
-            if(kurpiyerSkoru < 17)
+            while (SkorHesapla(kurpiyer) < 17 && Deste.Count > 0)
             {
                 kurpiyer.Add(Deste[0]);
+                ListViewItem cekilenKart2 = new ListViewItem(Deste[0].ToString());
+                listView1.Items.Add(cekilenKart2);
+                Deste.RemoveAt(0);
+                lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
+                lblToplam2.Text = oyuncuSkoru.ToString();
             }
+            SonucHesapla();
 
-            ListViewItem cekilenKart = new ListViewItem(Deste[0].ToString());
-            listView1.Items.Add(cekilenKart);
-            if(kurpiyerSkoru < 21&&oyuncuSkoru>kurpiyerSkoru)
-            {
-                MessageBox.Show("Tebrikler kazandýnýz");
-            }
-            else
-            {
-                MessageBox.Show("Kaybettiniz");
-            }
 
-            
+
         }
 
 
 
 
-        private void button3_Click(object sender, EventArgs e)
+
+
+        private void btnKartDagit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ÞAKA ÞAKA GAY DEGÝLSÝN");
+
+            btnKartCek.Enabled = true;
+
+            if (Deste.Count <= 0)
+            {
+                MessageBox.Show("Yeterli kart kalmadý.Baþtan daðýtýlýyor");
+                BitenKartDagit();
+            }
+
+            KartKarýþtýr();
+            kurpiyer.Clear();
+            oyuncu.Clear();
+
+            kurpiyer.Add(Deste[0]);
+            kurpiyer.Add(Deste[2]);
+            oyuncu.Add(Deste[1]);
+            oyuncu.Add(Deste[3]);
+            KartGoster();
+
+
+            Deste.RemoveRange(0, 4);
+            Hesapla();
+            btnDeneme_Click(sender, e);
         }
 
+        private void btnDouble_Click(object sender, EventArgs e)
+        {
+            if (Deste.Count > 0)
+            {
+                oyuncu.Add(Deste[0]);
+                ListViewItem cekilenKart = new ListViewItem(Deste[i].ToString());
+                listView1.Items.Add(cekilenKart);
+                Deste.RemoveAt(0);
+                btnGec_Click(sender, e);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+        }
     }
 }
