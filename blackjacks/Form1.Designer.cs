@@ -43,8 +43,9 @@
             lblToplam2 = new Label();
             pbBol2 = new PictureBox();
             pbBol = new PictureBox();
-            txtbox3 = new TextBox();
-            textBox2 = new TextBox();
+            timer1 = new System.Windows.Forms.Timer(components);
+            pgsSaniyeBari = new ProgressBar();
+            lblSaniye = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBol2).BeginInit();
@@ -53,6 +54,7 @@
             // 
             // btnDouble
             // 
+            btnDouble.Enabled = false;
             btnDouble.Location = new Point(515, 331);
             btnDouble.Name = "btnDouble";
             btnDouble.Size = new Size(112, 64);
@@ -63,6 +65,7 @@
             // 
             // btnGec
             // 
+            btnGec.Enabled = false;
             btnGec.Location = new Point(386, 331);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(112, 64);
@@ -94,7 +97,7 @@
             // 
             // btnKartDagit
             // 
-            btnKartDagit.Location = new Point(27, 24);
+            btnKartDagit.Location = new Point(701, 331);
             btnKartDagit.Name = "btnKartDagit";
             btnKartDagit.Size = new Size(112, 64);
             btnKartDagit.TabIndex = 0;
@@ -192,9 +195,9 @@
             // 
             // listView1
             // 
-            listView1.Location = new Point(546, 35);
+            listView1.Location = new Point(746, 24);
             listView1.Name = "listView1";
-            listView1.Size = new Size(667, 290);
+            listView1.Size = new Size(467, 301);
             listView1.TabIndex = 4;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -224,27 +227,33 @@
             pbBol.TabIndex = 1;
             pbBol.TabStop = false;
             // 
-            // txtbox3
+            // timer1
             // 
-            txtbox3.Location = new Point(347, 49);
-            txtbox3.Name = "txtbox3";
-            txtbox3.Size = new Size(88, 27);
-            txtbox3.TabIndex = 5;
+            timer1.Tick += timer1_Tick;
             // 
-            // textBox2
+            // pgsSaniyeBari
             // 
-            textBox2.Location = new Point(235, 43);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(88, 27);
-            textBox2.TabIndex = 5;
+            pgsSaniyeBari.Location = new Point(12, 12);
+            pgsSaniyeBari.Maximum = 60;
+            pgsSaniyeBari.Name = "pgsSaniyeBari";
+            pgsSaniyeBari.Size = new Size(169, 29);
+            pgsSaniyeBari.TabIndex = 6;
+            // 
+            // lblSaniye
+            // 
+            lblSaniye.Location = new Point(187, 12);
+            lblSaniye.Name = "lblSaniye";
+            lblSaniye.Size = new Size(92, 29);
+            lblSaniye.TabIndex = 7;
+            lblSaniye.Text = "label1";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1225, 502);
-            Controls.Add(textBox2);
-            Controls.Add(txtbox3);
+            Controls.Add(lblSaniye);
+            Controls.Add(pgsSaniyeBari);
             Controls.Add(listView1);
             Controls.Add(lblToplam2);
             Controls.Add(lblKurpiyerToplam);
@@ -265,7 +274,6 @@
             ((System.ComponentModel.ISupportInitialize)pbBol2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbBol).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -283,7 +291,8 @@
         private Label lblToplam2;
         private PictureBox pbBol2;
         private PictureBox pbBol;
-        private TextBox txtbox3;
-        private TextBox textBox2;
+        private System.Windows.Forms.Timer timer1;
+        private ProgressBar pgsSaniyeBari;
+        private Label lblSaniye;
     }
 }

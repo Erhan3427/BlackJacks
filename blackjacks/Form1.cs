@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace blackjacks
@@ -9,6 +10,7 @@ namespace blackjacks
         List<kartlar> kurpiyer = new List<kartlar>();
         List<kartlar> oyuncu = new List<kartlar>();
         Random random;
+        public int kalanSaniye = 60;
 
         public Form1()
         {
@@ -99,8 +101,15 @@ namespace blackjacks
         {
             int kurpiyerSkor = SkorHesapla(kurpiyer);
             int oyuncuSkor = SkorHesapla(oyuncu);
-
-            lblKurpiyerToplam.Text = kurpiyerSkor.ToString();
+            switch (kurpiyer[0].degerler)
+            {
+                case "A": lblKurpiyerToplam.Text = "11"; break;
+                case "J": 
+                case "Q": 
+                case "K": lblKurpiyerToplam.Text = "10"; break;
+                default: lblKurpiyerToplam.Text = kurpiyer[0].degerler; break;
+            }
+          
             lblToplam2.Text = oyuncuSkor.ToString();
         }
 
@@ -148,6 +157,10 @@ namespace blackjacks
         }
         public void SonucHesapla()
         {
+            kalanSaniye = 60;
+            timer1.Stop();
+            pgsSaniyeBari.Value = 0;
+
             int kurpiyerSkoru = SkorHesapla(kurpiyer);
             int oyuncuSkoru = SkorHesapla(oyuncu);
             lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
@@ -169,6 +182,16 @@ namespace blackjacks
             {
                 MessageBox.Show("Kaybettiniz!");
             }
+        }
+        public void Timer()
+        {
+            timer1.Stop();
+            timer1.Tick -= timer1_Tick;
+            timer1.Tick += timer1_Tick;
+            kalanSaniye = 60;
+            pgsSaniyeBari.Value = 0;
+            timer1.Interval = 1000;
+            timer1.Start();
         }
 
 
@@ -243,13 +266,16 @@ namespace blackjacks
 
 
                 int oyuncuSkoruSon = SkorHesapla(oyuncu);
-                int kurpiyerSkoru = SkorHesapla(kurpiyer);
                 lblToplam2.Text = oyuncuSkoruSon.ToString();
-                lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
+       
                 KartGoster();
+
                 if (oyuncuSkoruSon > 21)
                 {
                     MessageBox.Show("21 geçtiniz kaybettiniz");
+                    Thread.Sleep(1000);
+                    btnKartDagit_Click(sender, e);
+
                 }
                 kartSayisi++;
 
@@ -261,6 +287,10 @@ namespace blackjacks
 
         private void btnGec_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
+            pgsSaniyeBari.Value = 0;
+            kalanSaniye = 60;
+
             btnKartCek.Enabled = false;
 
             int kurpiyerSkoru = SkorHesapla(kurpiyer);
@@ -274,9 +304,9 @@ namespace blackjacks
                 lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
                 lblToplam2.Text = oyuncuSkoru.ToString();
             }
+            lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
             SonucHesapla();
-
-
+            btnKartDagit_Click(sender, e);
 
         }
 
@@ -287,7 +317,12 @@ namespace blackjacks
 
         private void btnKartDagit_Click(object sender, EventArgs e)
         {
+            kalanSaniye = 60; // Süreyi sýfýrla
+            pgsSaniyeBari.Value = 0; // ProgressBar'ý sýfýrla
+            btnGec.Enabled = true;
+            btnDouble.Enabled = true;
 
+            Timer();
             btnKartCek.Enabled = true;
 
             if (Deste.Count <= 0)
@@ -312,6 +347,8 @@ namespace blackjacks
             btnDeneme_Click(sender, e);
         }
 
+
+
         private void btnDouble_Click(object sender, EventArgs e)
         {
             if (Deste.Count > 0)
@@ -323,6 +360,21 @@ namespace blackjacks
                 btnGec_Click(sender, e);
 
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            kalanSaniye--;
+            pgsSaniyeBari.Value = 60 - kalanSaniye;
+            lblSaniye.Text = kalanSaniye.ToString();
+            if (kalanSaniye <= 0)
+            {
+                timer1.Stop();
+                MessageBox.Show("Süreniz doldu");
+                btnKartDagit.Enabled = true;
+            }
+
         }
     }
 }

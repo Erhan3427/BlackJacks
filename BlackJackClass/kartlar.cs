@@ -18,7 +18,7 @@ namespace blackjacks
         public string degerler { get; set; }
         public override string ToString()
         {
-            return kart+""+degerler;
+            return kart + "" + degerler;
         }
     }
 }
