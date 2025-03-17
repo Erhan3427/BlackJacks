@@ -1,6 +1,6 @@
 ﻿namespace blackjacks
 {
-    partial class Form1
+    partial class BlackJack
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlackJack));
             btnDouble = new Button();
             btnGec = new Button();
             btnKartCek = new Button();
@@ -46,6 +46,8 @@
             timer1 = new System.Windows.Forms.Timer(components);
             pgsSaniyeBari = new ProgressBar();
             lblSaniye = new Label();
+            btnParaCek = new Button();
+            btnCikis = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBol2).BeginInit();
@@ -54,62 +56,74 @@
             // 
             // btnDouble
             // 
+            btnDouble.BackColor = Color.Black;
             btnDouble.Enabled = false;
-            btnDouble.Location = new Point(515, 331);
+            btnDouble.FlatStyle = FlatStyle.Flat;
+            btnDouble.ForeColor = Color.White;
+            btnDouble.Location = new Point(365, 395);
             btnDouble.Name = "btnDouble";
             btnDouble.Size = new Size(112, 64);
             btnDouble.TabIndex = 0;
             btnDouble.Text = "Double";
-            btnDouble.UseVisualStyleBackColor = true;
+            btnDouble.UseVisualStyleBackColor = false;
             btnDouble.Click += btnDouble_Click;
             // 
             // btnGec
             // 
+            btnGec.BackColor = Color.Gold;
             btnGec.Enabled = false;
-            btnGec.Location = new Point(386, 331);
+            btnGec.FlatStyle = FlatStyle.Flat;
+            btnGec.Location = new Point(228, 395);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(112, 64);
             btnGec.TabIndex = 0;
             btnGec.Text = "Geç";
-            btnGec.UseVisualStyleBackColor = true;
+            btnGec.UseVisualStyleBackColor = false;
             btnGec.Click += btnGec_Click;
             // 
             // btnKartCek
             // 
+            btnKartCek.BackColor = Color.DarkRed;
             btnKartCek.Enabled = false;
-            btnKartCek.Location = new Point(84, 331);
+            btnKartCek.FlatStyle = FlatStyle.Flat;
+            btnKartCek.Location = new Point(84, 395);
             btnKartCek.Name = "btnKartCek";
             btnKartCek.Size = new Size(112, 64);
             btnKartCek.TabIndex = 0;
             btnKartCek.Text = "Kart Çek";
-            btnKartCek.UseVisualStyleBackColor = true;
+            btnKartCek.UseVisualStyleBackColor = false;
             btnKartCek.Click += btnKartCek_Click;
             // 
             // btnBol
             // 
+            btnBol.BackColor = Color.DodgerBlue;
             btnBol.Enabled = false;
-            btnBol.Location = new Point(235, 331);
+            btnBol.FlatStyle = FlatStyle.Flat;
+            btnBol.Location = new Point(494, 395);
             btnBol.Name = "btnBol";
             btnBol.Size = new Size(112, 64);
             btnBol.TabIndex = 0;
             btnBol.Text = "Böl";
-            btnBol.UseVisualStyleBackColor = true;
+            btnBol.UseVisualStyleBackColor = false;
+            btnBol.Click += btnBol_Click_1;
             // 
             // btnKartDagit
             // 
-            btnKartDagit.Location = new Point(701, 331);
+            btnKartDagit.BackColor = Color.LimeGreen;
+            btnKartDagit.FlatStyle = FlatStyle.Popup;
+            btnKartDagit.Location = new Point(617, 302);
             btnKartDagit.Name = "btnKartDagit";
-            btnKartDagit.Size = new Size(112, 64);
+            btnKartDagit.Size = new Size(163, 75);
             btnKartDagit.TabIndex = 0;
             btnKartDagit.Text = "kartları Dağıt";
-            btnKartDagit.UseVisualStyleBackColor = true;
+            btnKartDagit.UseVisualStyleBackColor = false;
             btnKartDagit.Click += btnKartDagit_Click;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(85, 160);
+            pictureBox1.Location = new Point(245, 200);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(112, 152);
+            pictureBox1.Size = new Size(112, 151);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -159,35 +173,32 @@
             ımageList1.Images.SetKeyName(37, "ace_of_diamonds.png");
             ımageList1.Images.SetKeyName(38, "ace_of_hearts.png");
             ımageList1.Images.SetKeyName(39, "ace_of_spades.png");
-            ımageList1.Images.SetKeyName(40, "back.png");
-            ımageList1.Images.SetKeyName(41, "back@2x.png");
-            ımageList1.Images.SetKeyName(42, "black_joker.png");
-            ımageList1.Images.SetKeyName(43, "jack_of_clubs.png");
-            ımageList1.Images.SetKeyName(44, "jack_of_diamonds.png");
-            ımageList1.Images.SetKeyName(45, "jack_of_hearts.png");
-            ımageList1.Images.SetKeyName(46, "jack_of_spades.png");
-            ımageList1.Images.SetKeyName(47, "king_of_clubs.png");
-            ımageList1.Images.SetKeyName(48, "king_of_diamonds.png");
-            ımageList1.Images.SetKeyName(49, "king_of_hearts.png");
-            ımageList1.Images.SetKeyName(50, "king_of_spades.png");
-            ımageList1.Images.SetKeyName(51, "queen_of_clubs.png");
-            ımageList1.Images.SetKeyName(52, "queen_of_diamonds.png");
-            ımageList1.Images.SetKeyName(53, "queen_of_hearts.png");
-            ımageList1.Images.SetKeyName(54, "queen_of_spades.png");
-            ımageList1.Images.SetKeyName(55, "red_joker.png");
+            ımageList1.Images.SetKeyName(40, "jack_of_clubs.png");
+            ımageList1.Images.SetKeyName(41, "jack_of_diamonds.png");
+            ımageList1.Images.SetKeyName(42, "jack_of_hearts.png");
+            ımageList1.Images.SetKeyName(43, "jack_of_spades.png");
+            ımageList1.Images.SetKeyName(44, "king_of_clubs.png");
+            ımageList1.Images.SetKeyName(45, "king_of_diamonds.png");
+            ımageList1.Images.SetKeyName(46, "king_of_hearts.png");
+            ımageList1.Images.SetKeyName(47, "king_of_spades.png");
+            ımageList1.Images.SetKeyName(48, "queen_of_clubs.png");
+            ımageList1.Images.SetKeyName(49, "queen_of_diamonds.png");
+            ımageList1.Images.SetKeyName(50, "queen_of_hearts.png");
+            ımageList1.Images.SetKeyName(51, "queen_of_spades.png");
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(235, 173);
+            pictureBox2.Location = new Point(537, 12);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(112, 152);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // lblKurpiyerToplam
             // 
-            lblKurpiyerToplam.Location = new Point(84, 127);
+            lblKurpiyerToplam.Location = new Point(537, 167);
             lblKurpiyerToplam.Name = "lblKurpiyerToplam";
             lblKurpiyerToplam.Size = new Size(112, 33);
             lblKurpiyerToplam.TabIndex = 3;
@@ -195,7 +206,7 @@
             // 
             // listView1
             // 
-            listView1.Location = new Point(746, 24);
+            listView1.Location = new Point(817, 12);
             listView1.Name = "listView1";
             listView1.Size = new Size(467, 301);
             listView1.TabIndex = 4;
@@ -203,26 +214,26 @@
             // 
             // lblToplam2
             // 
-            lblToplam2.Location = new Point(235, 127);
+            lblToplam2.Location = new Point(245, 162);
             lblToplam2.Name = "lblToplam2";
-            lblToplam2.Size = new Size(112, 33);
+            lblToplam2.Size = new Size(112, 32);
             lblToplam2.TabIndex = 3;
-            lblToplam2.Text = "label1";
+            lblToplam2.Text = "oyuncu";
             // 
             // pbBol2
             // 
-            pbBol2.Location = new Point(145, 233);
+            pbBol2.Location = new Point(306, 271);
             pbBol2.Name = "pbBol2";
-            pbBol2.Size = new Size(69, 92);
+            pbBol2.Size = new Size(69, 91);
             pbBol2.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBol2.TabIndex = 1;
             pbBol2.TabStop = false;
             // 
             // pbBol
             // 
-            pbBol.Location = new Point(70, 233);
+            pbBol.Location = new Point(231, 271);
             pbBol.Name = "pbBol";
-            pbBol.Size = new Size(69, 92);
+            pbBol.Size = new Size(69, 91);
             pbBol.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBol.TabIndex = 1;
             pbBol.TabStop = false;
@@ -241,17 +252,46 @@
             // 
             // lblSaniye
             // 
+            lblSaniye.FlatStyle = FlatStyle.Popup;
             lblSaniye.Location = new Point(187, 12);
             lblSaniye.Name = "lblSaniye";
             lblSaniye.Size = new Size(92, 29);
             lblSaniye.TabIndex = 7;
-            lblSaniye.Text = "label1";
+            lblSaniye.Text = "saniye";
             // 
-            // Form1
+            // btnParaCek
+            // 
+            btnParaCek.BackColor = Color.DarkKhaki;
+            btnParaCek.FlatStyle = FlatStyle.Flat;
+            btnParaCek.Location = new Point(817, 340);
+            btnParaCek.Name = "btnParaCek";
+            btnParaCek.Size = new Size(152, 58);
+            btnParaCek.TabIndex = 8;
+            btnParaCek.Text = "Para Cek";
+            btnParaCek.UseVisualStyleBackColor = false;
+            btnParaCek.Click += btnParaCek_Click;
+            // 
+            // btnCikis
+            // 
+            btnCikis.BackColor = Color.DarkRed;
+            btnCikis.FlatStyle = FlatStyle.Flat;
+            btnCikis.Location = new Point(817, 413);
+            btnCikis.Name = "btnCikis";
+            btnCikis.Size = new Size(152, 58);
+            btnCikis.TabIndex = 8;
+            btnCikis.Text = "Çıkış";
+            btnCikis.UseVisualStyleBackColor = false;
+            btnCikis.Click += button1_Click;
+            // 
+            // BlackJack
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1225, 502);
+            BackColor = Color.DarkGreen;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1310, 502);
+            Controls.Add(btnCikis);
+            Controls.Add(btnParaCek);
             Controls.Add(lblSaniye);
             Controls.Add(pgsSaniyeBari);
             Controls.Add(listView1);
@@ -266,7 +306,9 @@
             Controls.Add(btnKartCek);
             Controls.Add(btnGec);
             Controls.Add(btnDouble);
-            Name = "Form1";
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "BlackJack";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -294,5 +336,7 @@
         private System.Windows.Forms.Timer timer1;
         private ProgressBar pgsSaniyeBari;
         private Label lblSaniye;
+        private Button btnParaCek;
+        private Button btnCikis;
     }
 }
