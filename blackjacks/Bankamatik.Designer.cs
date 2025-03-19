@@ -173,7 +173,7 @@
             mtbCekilecekTutar.Size = new Size(195, 27);
             mtbCekilecekTutar.TabIndex = 8;
             mtbCekilecekTutar.ValidatingType = typeof(int);
-            mtbCekilecekTutar.MaskInputRejected += mtbCekilecekTutar_MaskInputRejected;
+            mtbCekilecekTutar.Leave += mtbCekilecekTutar_Leave;
             // 
             // Bankamatik
             // 

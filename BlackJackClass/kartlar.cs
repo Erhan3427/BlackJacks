@@ -16,6 +16,8 @@ namespace blackjacks
 
         public string kart { get; set; }
         public string degerler { get; set; }
+        public int Imageindex { get; set; }
+
         public override string ToString()
         {
             return kart + "" + degerler;

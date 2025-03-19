@@ -17,7 +17,7 @@ namespace BlackJackClass
 			get { return _bakiye; }
 			set
 			{
-				if (_bakiye <= 0)
+				if (value <= 0)
 				{
 
 					throw new ArgumentException("");

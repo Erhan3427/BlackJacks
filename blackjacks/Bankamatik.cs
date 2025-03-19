@@ -17,43 +17,52 @@ namespace blackjacks
         public Bankamatik()
         {
             InitializeComponent();
+            mtbCekilecekTutar.SelectionStart = 0;
+            mtbCekilecekTutar.PromptChar = ' ';
             lblBakiye.Text = banka.Bakiye.ToString("C");
         }
         private void Bankamatik_Load(object sender, EventArgs e)
         {
-            mtbCekilecekTutar.SelectionStart = 0;
-            mtbCekilecekTutar.PromptChar = ' ';
-            mtbCekilecekTutar.TextChanged += mtbCekilecekTutar_TextChanged;
 
             mtbCekilecekTutar.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            mtbCekilecekTutar.Leave += mtbCekilecekTutar_Leave;
+
 
         }
 
+
         private void btnParaCek_Click(object sender, EventArgs e)
         {
-            if (!decimal.TryParse(mtbCekilecekTutar.Text, out decimal cekilecekTutar))
+            try
             {
-                MessageBox.Show("Hatalı isim soyisim");
+                if (!decimal.TryParse(mtbCekilecekTutar.Text, out decimal cekilecekTutar))
+                {
+                    MessageBox.Show("Hatalı isim soyisim");
+                }
+
+                else if (string.IsNullOrEmpty(txtİsimSoyisim.Text) || txtİsimSoyisim.Text.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Lütfen isim soyisim kısmını doğru giriniz");
+
+                }
+                else if (cekilecekTutar > banka.Bakiye)
+                {
+                    MessageBox.Show("Yetersiz bakiye.");
+                    return;
+                }
+                else
+                {
+                    banka.Bakiye -= Convert.ToDecimal(mtbCekilecekTutar.Text);
+                    lblBakiye.Text = banka.Bakiye.ToString("C");
+                }
             }
-            else if (string.IsNullOrEmpty(txtİsimSoyisim.Text) || txtİsimSoyisim.Text.Any(char.IsDigit))
+            catch (Exception ex)
             {
-                MessageBox.Show("Lütfen isim soyisim kısmını doğru giriniz");
+                MessageBox.Show(ex.Message);
 
-            }
-            else if (cekilecekTutar <= 0)
-            {
-                MessageBox.Show("0 dan küçük para çekilemez");
 
 
             }
-            else
-            {
-                banka.Bakiye -= Convert.ToDecimal(mtbCekilecekTutar.Text);
-                lblBakiye.Text = banka.Bakiye.ToString("C");
-            }
-
-
-
         }
 
         private void btnParaYatir_Click(object sender, EventArgs e)
@@ -69,7 +78,7 @@ namespace blackjacks
             }
             else if (cekilecekTutar <= 0)
             {
-                MessageBox.Show("0 dan küçük para çekilemez");
+                MessageBox.Show("0 dan küçük para yatırılmaz");
 
 
             }
@@ -83,12 +92,14 @@ namespace blackjacks
         }
 
 
-       
 
-        private void mtbCekilecekTutar_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void mtbCekilecekTutar_Leave(object sender, EventArgs e)
         {
             mtbCekilecekTutar.SelectionStart = 0;
-
         }
+
+
+
     }
+
 }
