@@ -16,7 +16,7 @@ namespace blackjacks
         Banka Banka = new Banka();
         decimal yatýrýlanPara = 0;
         public int kalanSaniye = 60;
-
+        decimal tutulanPara = 0; 
         public BlackJack()
         {
             InitializeComponent();
@@ -28,6 +28,7 @@ namespace blackjacks
             KartDagýt(); // Kart destesi oluþturuluyor
             KartKaristir(); // Kartlar karýþtýrýlýyor
             lblBakiyeOyun.Text = Banka.Bakiye.ToString("C");
+            tutulanPara=Banka.Bakiye;
 
         }
 
@@ -160,32 +161,17 @@ namespace blackjacks
 
         public void OyuncuKartGoster()
         {
-
-            // Oyuncunun elindeki kartlarý göster
+            KartSil();
             for (int i = 0; i < oyuncu.Count; i++)
             {
-                //PictureBox pictureBox = new PictureBox
-                //{
-                //    Width = 80,
-                //    Height = 120,
-                //    SizeMode = PictureBoxSizeMode.StretchImage,
-                //    Location = new Point(335 + (i * 110), 250) // Kartlar yatay olarak sýralanýr
-                //};
-
-                // ImageList'ten doðru resmi al
                 pbOyuncu.Image = ýmageList1.Images[oyuncu[0].Imageindex];
-                pbOyuncu2.Image = ýmageList1.Images[oyuncu[1].Imageindex];  
-
-                // PictureBox'ý forma ekle
-                //this.Controls.Add(pictureBox);
-                //pictureBox.BringToFront();
-
-                //// PictureBox'ý listeye ekle
-                //kartlarResim.Add(pictureBox);
+                pbOyuncu2.Image = ýmageList1.Images[oyuncu[1].Imageindex];
             }
+
         }
         public void BitenKartDagit()
         {
+
             kurpiyer.Clear();
             oyuncu.Clear();
             Deste.Clear();
@@ -209,35 +195,37 @@ namespace blackjacks
             if (oyuncuSkoru > 21)
             {
                 MessageBox.Show("21'i geçtiniz, kaybettiniz!");
-                GuncelBakiye(-yatýrýlanPara);
-                KartSil();
+                decimal kayýpPara2 = tutulanPara - Convert.ToDecimal(lblYatirilanPara.Text);
+                GuncelBakiye(kayýpPara2);
             }
             else if (kurpiyerSkoru > 21 || oyuncuSkoru > kurpiyerSkoru)
             {
                 MessageBox.Show("Tebrikler, kazandýnýz!");
-                GuncelBakiye(yatýrýlanPara * 2);
-                KartSil();
+                decimal kazanýlanPara = tutulanPara + Convert.ToDecimal(lblYatirilanPara.Text);
+
+                GuncelBakiye(kazanýlanPara);
             }
             else if (oyuncuSkoru == kurpiyerSkoru)
             {
                 MessageBox.Show("Berabere!");
-                KartSil();
             }
             else
             {
                 MessageBox.Show("Kaybettiniz!");
-                GuncelBakiye(-yatýrýlanPara);
-                KartSil();
+                decimal kayýpPara = tutulanPara - Convert.ToDecimal(lblYatirilanPara.Text);
+                GuncelBakiye(kayýpPara);
             }
 
             lblYatirilanPara.Text = "0";
         }
 
-        private void GuncelBakiye(decimal bakiyet)
+        private void GuncelBakiye(decimal bakiye)
         {
-            if (decimal.TryParse(lblBakiyeOyun.Text, out decimal mevcutBakiye))
+            if (decimal.TryParse(bakiye.ToString(), out decimal bakiyet))
             {
-                Banka.Bakiye = (mevcutBakiye + bakiyet);
+                Banka.Bakiye = bakiyet;
+                tutulanPara = bakiyet;
+                lblBakiyeOyun.Text = Banka.Bakiye.ToString("C");
             }
             else
             {
@@ -247,7 +235,7 @@ namespace blackjacks
 
         public void Timer()
         {
-            timer1.Stop(); 
+            timer1.Stop();
             timer1.Tick -= timer1_Tick;
             timer1.Tick += timer1_Tick;
             kalanSaniye = 60;
@@ -262,7 +250,7 @@ namespace blackjacks
             pictureBox1.Width = 80;
             pictureBox1.Height = 120;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.Image = ýmageList1.Images[oyuncu[0].Imageindex];
+            pictureBox1.Image = ýmageList1.Images[oyuncu[^1].Imageindex];
 
             pictureBox1.Location = new Point(450 + (kartlarResim.Count * 110), 250);
             pictureBox1.BringToFront();
@@ -277,6 +265,7 @@ namespace blackjacks
             foreach (var pictureBox in kartlarResim)
             {
                 this.Controls.Remove(pictureBox);
+                pbKurpiyer2.Image = null; // Kurpiyer kartýný temizle   
                 pictureBox.Dispose(); // Hafýzadan kaldýr
             }
             kartlarResim.Clear(); // Listeyi sýfýrla
@@ -386,8 +375,9 @@ namespace blackjacks
 
                 pictureBox2.Size = new Size(80, 120);  // Boyut ayarla
                 pictureBox2.Location = new Point(660, 12);
-                pictureBox2.Image = ýmageList1.Images[kurpiyer[^1].Imageindex];
+                pictureBox2.Image = ýmageList1.Images[kurpiyer[^1].Imageindex]; // Resmi ekle  
                 this.Controls.Add(pictureBox2);
+                kartlarResim.Add(pictureBox2);
 
 
 
@@ -396,6 +386,7 @@ namespace blackjacks
                 lblToplam2.Text = oyuncuSkoru.ToString();
             }
             lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
+            pbKurpiyer2.Image = ýmageList1.Images[kurpiyer[1].Imageindex];
             SonucHesapla();
             btnKartDagit_Click(sender, e);
 
@@ -430,19 +421,20 @@ namespace blackjacks
             else
             {
 
-                
+
                 kurpiyer.Clear();
                 oyuncu.Clear();
                 if (Deste.Count >= 4)
                 {
-                    kurpiyer.Add(Deste[0]);
-                    kurpiyer.Add(Deste[2]);
-                    oyuncu.Add(Deste[1]);
-                    oyuncu.Add(Deste[3]);
+                    oyuncu.Add(Deste[0]);
+                    kurpiyer.Add(Deste[1]);
+                    oyuncu.Add(Deste[2]);
+                    kurpiyer.Add(Deste[3]);
+                    Deste.RemoveRange(0, 4);
+
                     OyuncuKartGoster();
                     pbKurpiyer.Image = ýmageList1.Images[kurpiyer[0].Imageindex];
-                    pbKurpiyer2.Image = ýmageList1.Images[kurpiyer[1].Imageindex];
-                    Deste.RemoveRange(0, 4);
+                    //pbKurpiyer2.Image = ýmageList1.Images[kurpiyer[1].Imageindex];
                     Hesapla();
                     btnDeneme_Click(sender, e);
 
@@ -461,11 +453,48 @@ namespace blackjacks
             if (Deste.Count > 0)
             {
                 oyuncu.Add(Deste[0]);
-                ListViewItem cekilenKart = new ListViewItem(Deste[i].ToString());
+                ListViewItem cekilenKart = new ListViewItem(Deste[0].ToString());
                 listView1.Items.Add(cekilenKart);
                 Deste.RemoveAt(0);
-                btnGec_Click(sender, e);
 
+
+                kalanSaniye = 60;
+                timer1.Stop();
+                pgsSaniyeBari.Value = 0;
+
+                int kurpiyerSkoru = SkorHesapla(kurpiyer);
+                int oyuncuSkoru = SkorHesapla(oyuncu);
+
+                lblKurpiyerToplam.Text = kurpiyerSkoru.ToString();
+                lblToplam2.Text = oyuncuSkoru.ToString();
+
+                if (oyuncuSkoru > 21)
+                {
+                    MessageBox.Show("21'i geçtiniz, kaybettiniz!");
+                    decimal kayýpPara2 = tutulanPara - (Convert.ToDecimal(lblYatirilanPara.Text) * 2);
+                    GuncelBakiye(kayýpPara2);
+                }
+                else if (kurpiyerSkoru > 21 || oyuncuSkoru > kurpiyerSkoru)
+                {
+                    MessageBox.Show("Tebrikler, kazandýnýz!");
+                    decimal kazanýlanPara = tutulanPara + (Convert.ToDecimal(lblYatirilanPara.Text) * 2);
+
+                    GuncelBakiye(kazanýlanPara);
+                }
+                else if (oyuncuSkoru == kurpiyerSkoru)
+                {
+                    MessageBox.Show("Berabere!");
+                }
+                else
+                {
+                    MessageBox.Show("Kaybettiniz!");
+                    decimal kayýpPara = tutulanPara - (Convert.ToDecimal(lblYatirilanPara.Text)*2);
+                    GuncelBakiye(kayýpPara);
+                }
+
+                lblYatirilanPara.Text = "0";
+
+                btnKartDagit_Click(sender, e);  
             }
         }
 
@@ -509,6 +538,27 @@ namespace blackjacks
                 lblYatirilanPara.Text = (mevcutBakiye + yatýrýlanPara).ToString();
             }
 
+        }
+
+        private void btnBeþyuz_Click(object sender, EventArgs e)
+        {
+            yatýrýlanPara = 0;
+            if (decimal.TryParse(lblYatirilanPara.Text, out decimal mevcutBakiye))
+            {
+                yatýrýlanPara += 500;
+                lblYatirilanPara.Text = (mevcutBakiye + yatýrýlanPara).ToString();
+            }
+
+        }
+
+        private void btnBin_Click(object sender, EventArgs e)
+        {
+            yatýrýlanPara = 0;
+            if (decimal.TryParse(lblYatirilanPara.Text, out decimal mevcutBakiye))
+            {
+                yatýrýlanPara += 1000;
+                lblYatirilanPara.Text = (mevcutBakiye + yatýrýlanPara).ToString();
+            }
         }
     }
 }

@@ -23,10 +23,8 @@ namespace blackjacks
         }
         private void Bankamatik_Load(object sender, EventArgs e)
         {
-
             mtbCekilecekTutar.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             mtbCekilecekTutar.Leave += mtbCekilecekTutar_Leave;
-
 
         }
 

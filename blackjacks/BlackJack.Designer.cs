@@ -46,8 +46,8 @@
             btnCikis = new Button();
             lblBakiyeOyun = new Label();
             btnPara1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            btnBin = new Button();
+            btnBeşyuz = new Button();
             lblYatirilanPara = new Label();
             pbOyuncu = new PictureBox();
             pbBol2 = new PictureBox();
@@ -55,6 +55,7 @@
             lblToplam2 = new Label();
             pbOyuncu2 = new PictureBox();
             pbKurpiyer2 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbKurpiyer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbOyuncu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBol2).BeginInit();
@@ -261,39 +262,48 @@
             // 
             lblBakiyeOyun.AutoSize = true;
             lblBakiyeOyun.Font = new Font("Segoe UI", 15F);
-            lblBakiyeOyun.Location = new Point(628, 424);
+            lblBakiyeOyun.Location = new Point(635, 395);
             lblBakiyeOyun.Name = "lblBakiyeOyun";
-            lblBakiyeOyun.Size = new Size(81, 35);
+            lblBakiyeOyun.Size = new Size(85, 35);
             lblBakiyeOyun.TabIndex = 9;
-            lblBakiyeOyun.Text = "label1";
+            lblBakiyeOyun.Text = "Bakiye";
             // 
             // btnPara1
             // 
-            btnPara1.Location = new Point(12, 149);
+            btnPara1.BackColor = Color.DarkOrange;
+            btnPara1.BackgroundImageLayout = ImageLayout.Stretch;
+            btnPara1.FlatStyle = FlatStyle.Flat;
+            btnPara1.Location = new Point(12, 197);
             btnPara1.Name = "btnPara1";
             btnPara1.Size = new Size(61, 56);
             btnPara1.TabIndex = 10;
-            btnPara1.Text = "button1";
-            btnPara1.UseVisualStyleBackColor = true;
+            btnPara1.Text = "100";
+            btnPara1.UseVisualStyleBackColor = false;
             btnPara1.Click += btnPara1_Click;
             // 
-            // button2
+            // btnBin
             // 
-            button2.Location = new Point(12, 340);
-            button2.Name = "button2";
-            button2.Size = new Size(61, 56);
-            button2.TabIndex = 10;
-            button2.Text = "button1";
-            button2.UseVisualStyleBackColor = true;
+            btnBin.BackColor = Color.Crimson;
+            btnBin.FlatStyle = FlatStyle.Flat;
+            btnBin.Location = new Point(12, 326);
+            btnBin.Name = "btnBin";
+            btnBin.Size = new Size(61, 56);
+            btnBin.TabIndex = 10;
+            btnBin.Text = "1000";
+            btnBin.UseVisualStyleBackColor = false;
+            btnBin.Click += btnBin_Click;
             // 
-            // button3
+            // btnBeşyuz
             // 
-            button3.Location = new Point(12, 271);
-            button3.Name = "button3";
-            button3.Size = new Size(61, 56);
-            button3.TabIndex = 10;
-            button3.Text = "button1";
-            button3.UseVisualStyleBackColor = true;
+            btnBeşyuz.BackColor = Color.Sienna;
+            btnBeşyuz.FlatStyle = FlatStyle.Flat;
+            btnBeşyuz.Location = new Point(12, 261);
+            btnBeşyuz.Name = "btnBeşyuz";
+            btnBeşyuz.Size = new Size(61, 56);
+            btnBeşyuz.TabIndex = 10;
+            btnBeşyuz.Text = "500";
+            btnBeşyuz.UseVisualStyleBackColor = false;
+            btnBeşyuz.Click += btnBeşyuz_Click;
             // 
             // lblYatirilanPara
             // 
@@ -363,6 +373,17 @@
             pbKurpiyer2.TabStop = false;
             pbKurpiyer2.Click += pictureBox2_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Firebrick;
+            label1.Font = new Font("Segoe UI", 11F);
+            label1.Location = new Point(12, 162);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 25);
+            label1.TabIndex = 13;
+            label1.Text = "Chips";
+            // 
             // BlackJack
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -370,14 +391,15 @@
             BackColor = Color.DarkGreen;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1310, 502);
+            Controls.Add(label1);
             Controls.Add(pbOyuncu2);
             Controls.Add(lblToplam2);
             Controls.Add(pbBol);
             Controls.Add(lblYatirilanPara);
             Controls.Add(pbBol2);
             Controls.Add(pbOyuncu);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnBeşyuz);
+            Controls.Add(btnBin);
             Controls.Add(btnPara1);
             Controls.Add(lblBakiyeOyun);
             Controls.Add(btnCikis);
@@ -426,8 +448,8 @@
         private Button btnCikis;
         private Label lblBakiyeOyun;
         private Button btnPara1;
-        private Button button2;
-        private Button button3;
+        private Button btnBin;
+        private Button btnBeşyuz;
         private Label lblYatirilanPara;
         private PictureBox pbOyuncu;
         private PictureBox pbBol2;
@@ -435,5 +457,6 @@
         private Label lblToplam2;
         private PictureBox pbOyuncu2;
         private PictureBox pbKurpiyer2;
+        private Label label1;
     }
 }

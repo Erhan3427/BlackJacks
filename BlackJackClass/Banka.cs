@@ -6,28 +6,21 @@ using System.Threading.Tasks;
 
 namespace BlackJackClass
 {
-    
+
     public class Banka
     {
 
-		private decimal _bakiye=1000;
+        private decimal _bakiye = 1000;
 
-		public decimal Bakiye 
-		{
-			get { return _bakiye; }
-			set
-			{
-				if (value <= 0)
-				{
+        public decimal Bakiye
+        {
+            get { return _bakiye; }
+            set
+            {
+                _bakiye = value;
 
-					throw new ArgumentException("");
-				}
-				else
-				{
-					_bakiye = value;
-				}
-			}
-		}
+            }
+        }
 
 
 
@@ -35,6 +28,6 @@ namespace BlackJackClass
 
 
 
-	}
+    }
 
 }

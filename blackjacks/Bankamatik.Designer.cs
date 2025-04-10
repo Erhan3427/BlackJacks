@@ -196,6 +196,7 @@
             Controls.Add(btnParaYatir);
             Controls.Add(btnParaCek);
             Name = "Bankamatik";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Banka";
             Load += Bankamatik_Load;
             ResumeLayout(false);
